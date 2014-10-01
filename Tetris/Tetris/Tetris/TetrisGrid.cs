@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
  */
 class TetrisGrid
 {
+    Color[,] grid = new Color[12, 20];
     public TetrisGrid(Texture2D b)
     {
         gridblock = b;
