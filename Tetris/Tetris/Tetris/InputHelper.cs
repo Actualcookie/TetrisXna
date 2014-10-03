@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 
 class InputHelper
 {
+    protected Vector2 scale;
     /* 
      * current and previous mouse/keyboard states
      */
@@ -48,12 +49,17 @@ class InputHelper
         currentKeyboardState = Keyboard.GetState();
     }
 
+    public Vector2 Scale
+    {
+        get { return scale; }
+        set { scale = value; }
+    }
     /*
      * returns the current mouse position
      */
     public Vector2 MousePosition
     {
-        get { return new Vector2(currentMouseState.X, currentMouseState.Y); }
+        get { return new Vector2(currentMouseState.X, currentMouseState.Y) / scale; }
     }
 
     /*

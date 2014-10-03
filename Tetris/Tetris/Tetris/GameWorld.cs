@@ -74,9 +74,9 @@ class GameWorld
               velocity = 0.0f;)*/
     }
 
-    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix scale)
     {
-        spriteBatch.Begin();
+        spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, scale);
         grid.Draw(gameTime, spriteBatch);
         spriteBatch.End();
     }
