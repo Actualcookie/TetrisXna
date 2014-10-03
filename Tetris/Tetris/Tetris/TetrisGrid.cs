@@ -52,9 +52,13 @@ class TetrisGrid
      */
     public void Draw(GameTime gameTime, SpriteBatch s)
     {
-        for (int x = 0; x < 12; x++)
-            for (int y = 0; y < 20; y++)
-                s.Draw(gridblock, new Vector2(position.X + x * gridblock.Width, position.Y + y * gridblock.Height), Color.White);
+        Color[,] grid = new Color[12, 20];
+        for (int x = 0; x < grid.GetLength(0); x++)
+            for (int y = 0; y < grid.GetLength(1); y++)
+            {
+                Vector2 position = new Vector2(x * gridblock.Width, y * gridblock.Height);
+                s.Draw(gridblock, position, Color.White);
+            }
     }
 }
 
