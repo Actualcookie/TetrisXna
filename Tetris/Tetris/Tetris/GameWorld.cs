@@ -70,6 +70,8 @@ class GameWorld
 
     public void Update(GameTime gameTime)
     {
+         /* (if(Collision(true)) 
+              velocity = 0.0f;)*/
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix scale)
