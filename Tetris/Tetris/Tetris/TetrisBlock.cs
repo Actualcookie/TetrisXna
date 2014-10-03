@@ -20,8 +20,7 @@ namespace Tetris
               */     }
     public void Rotation()
      {
-        //roteren van het figuur binnen de array. Moet dus ook links en Rechts om.
-     // 
+        // 
     }
        public void BlockShape()
     {
