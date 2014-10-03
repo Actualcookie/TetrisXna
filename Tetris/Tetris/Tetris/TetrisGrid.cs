@@ -58,7 +58,7 @@ class TetrisGrid
             for (int y = 0; y < grid.GetLength(1); y++)
             {
                 Vector2 position = new Vector2(x * gridblock.Width, y * gridblock.Height);
-                s.Draw(gridblock, position, Color.White);
+                s.Draw(gridblock, position, Color.Gray);
             }
     }
 }
