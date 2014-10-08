@@ -78,7 +78,18 @@ class GameWorld
     {
         spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, scale);
         grid.Draw(gameTime, spriteBatch);
+        TetrisBlock.Iblock();
         spriteBatch.End();
+    }
+
+    public Vector2 GetAnchorPosition(GameObject s)
+    {
+        for (int x = 0; x < Columns; x++)
+            for (int y = 0; y < Rows; y++)
+                if (grid[x, y] == s)
+                    return new Vector2(x * cellWidth,
+                                                         y * cellHeight);
+        return Vector2.Zero;
     }
 
     /*
