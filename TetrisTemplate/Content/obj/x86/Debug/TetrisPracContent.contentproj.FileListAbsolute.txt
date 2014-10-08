@@ -1,0 +1,2 @@
+C:\Users\Egges101\Desktop\TetrisTemplate\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Robin\Downloads\TetrisTemplate\TetrisTemplate\Content\obj\x86\Debug\TetrisPracContent.contentprojResolveAssemblyReference.cache

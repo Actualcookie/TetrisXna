@@ -10,7 +10,8 @@ using System;
  */
 class GameWorld
 {
-    /*
+    TetrisBlock tetrisBlock;
+     /*
      * enum for different game states (playing or game over)
      */
     enum GameState
@@ -48,8 +49,6 @@ class GameWorld
      */
     TetrisGrid grid;
 
-    TetrisBlock iblock;
-
     public GameWorld(int width, int height, ContentManager Content)
     {
         screenWidth = width;
@@ -60,7 +59,7 @@ class GameWorld
         block = Content.Load<Texture2D>("block");
         font = Content.Load<SpriteFont>("SpelFont");
         grid = new TetrisGrid(block);
-        iblock = new IBlock(block);
+        tetrisBlock = new TetrisBlock(block);
     }
 
     public void Reset()
@@ -69,19 +68,20 @@ class GameWorld
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
+        if (inputHelper.KeyPressed(Keys.Right) && (tetrisBlock.position.X + block.Width) < screenWidth)
+            tetrisBlock.position.X += block.Width;
     }
 
     public void Update(GameTime gameTime)
     {
-         /* (if(Collision(true)) 
-              velocity = 0.0f;)*/
     }
 
-    public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix scale)
+    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, scale);
+        spriteBatch.Begin();
         grid.Draw(gameTime, spriteBatch);
-        spriteBatch.End();
+        tetrisBlock.Draw(gameTime, spriteBatch);
+        spriteBatch.End();    
     }
 
     /*

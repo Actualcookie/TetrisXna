@@ -1,13 +1,13 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 /*
  * a class for representing the Tetris playing grid
  */
 class TetrisGrid
 {
-    Color[,] grid = new Color[12, 20];
     public TetrisGrid(Texture2D b)
     {
         gridblock = b;
@@ -53,13 +53,9 @@ class TetrisGrid
      */
     public void Draw(GameTime gameTime, SpriteBatch s)
     {
-        Color[,] grid = new Color[12, 20];
-        for (int x = 0; x < grid.GetLength(0); x++)
-            for (int y = 0; y < grid.GetLength(1); y++)
-            {
-                Vector2 position = new Vector2(x * gridblock.Width, y * gridblock.Height);
-                s.Draw(gridblock, position, Color.White);
-            }
+        for (int x = 0; x < 12; x++)
+            for (int y = 0; y < 20; y++)
+                s.Draw(gridblock, new Vector2(position.X + x * gridblock.Width, position.Y + y * gridblock.Height), Color.White);
     }
 }
 

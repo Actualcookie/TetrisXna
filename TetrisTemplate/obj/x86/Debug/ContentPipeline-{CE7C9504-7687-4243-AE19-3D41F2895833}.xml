@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Robin\Documents\GitHub\TetrisXna\Tetris\Tetris\Tetris\bin\x86\Debug\Content\block.xnb</Output>
-      <Time>2014-10-01T15:52:39.3325111+02:00</Time>
+      <Output>C:\Users\Robin\Downloads\TetrisTemplate\TetrisTemplate\bin\x86\Debug\Content\block.xnb</Output>
+      <Time>2014-10-01T11:22:25.394375+02:00</Time>
     </Item>
     <Item>
       <Source>SpelFont.spritefont</Source>
@@ -16,20 +16,20 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Robin\Documents\GitHub\TetrisXna\Tetris\Tetris\Tetris\bin\x86\Debug\Content\SpelFont.xnb</Output>
-      <Time>2014-10-01T15:52:39.4180335+02:00</Time>
+      <Output>C:\Users\Robin\Downloads\TetrisTemplate\TetrisTemplate\bin\x86\Debug\Content\SpelFont.xnb</Output>
+      <Time>2014-10-01T11:22:25.4724949+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
-      <ContentProjectGUID>{8EEFE4F3-E2DB-4A7A-9B53-91407C34A1CC}</ContentProjectGUID>
+      <ContentProjectGUID>{CE7C9504-7687-4243-AE19-3D41F2895833}</ContentProjectGUID>
       <TargetPlatform>Windows</TargetPlatform>
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Robin\Documents\GitHub\TetrisXna\Tetris\Tetris\TetrisContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Robin\Documents\GitHub\TetrisXna\Tetris\Tetris\Tetris\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Robin\Documents\GitHub\TetrisXna\Tetris\Tetris\Tetris\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Robin\Documents\GitHub\TetrisXna\Tetris\Tetris\Tetris\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Robin\Downloads\TetrisTemplate\TetrisTemplate\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Robin\Downloads\TetrisTemplate\TetrisTemplate\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Robin\Downloads\TetrisTemplate\TetrisTemplate\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Robin\Downloads\TetrisTemplate\TetrisTemplate\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
