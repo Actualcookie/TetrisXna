@@ -8,20 +8,19 @@ using Microsoft.Xna.Framework.Graphics;
 class TetrisBlock
 {
     public Vector2 position;
-    Texture2D block;
-
-    Color[,] shape;
+    public Texture2D block;
+    public Color[,] shape;
 
     public TetrisBlock(Texture2D b)
     {
         block = b;
-        shape = new Color[4, 4]
-        {
+        shape = new Color[4, 4];
+     /*   {
             {Color.White, Color.White, Color.White, Color.White},
             {Color.White, Color.White, Color.White, Color.White},
             {Color.Red,   Color.Red,   Color.Red,   Color.Red},
             {Color.White, Color.White, Color.White, Color.White},
-        };
+        };*/
         position = Vector2.Zero;
     }
 
