@@ -8,28 +8,23 @@ using Microsoft.Xna.Framework.Input;
 
 class TetrisBlock
 {
-    public Vector2 position;
-<<<<<<< HEAD
+    protected Vector2 position;
     Texture2D block;
     Point relPos;
-    
+   protected Color[,] shape;
 
-    Color[,] shape;
-=======
-    public Texture2D block;
-    public Color[,] shape;
->>>>>>> origin/master
 
     public TetrisBlock(Texture2D b)
     {
         block = b;
-        shape = new Color[4, 4];
-     /*   {
+        /*shape = new Color[4, 4]
+      {
             {Color.White, Color.White, Color.White, Color.White},
             {Color.White, Color.White, Color.White, Color.White},
             {Color.Red,   Color.Red,   Color.Red,   Color.Red},
             {Color.White, Color.White, Color.White, Color.White},
-        };*/
+        };
+         */
         position = Vector2.Zero;
     }
 
@@ -63,7 +58,7 @@ class TetrisBlock
 
     public virtual void Update(GameTime gameTime)
     {
-
+       
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch s)

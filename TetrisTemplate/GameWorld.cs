@@ -59,7 +59,7 @@ class GameWorld
         block = Content.Load<Texture2D>("block");
         font = Content.Load<SpriteFont>("SpelFont");
         grid = new TetrisGrid(block);
-        tetrisBlock = new TetrisBlock(block);
+        tetrisBlock = new LBlock(block);
     }
 
     public void Reset()

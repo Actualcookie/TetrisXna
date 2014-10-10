@@ -1,2 +1,0 @@
-C:\Users\Robin\Documents\GitHub\TetrisXna\Tetris\Tetris\TetrisContent\obj\x86\Debug\TetrisContent.contentprojResolveAssemblyReference.cache
-C:\Users\Timotheus Schut\Documents\GitHub\TetrisXna\Tetris\Tetris\TetrisContent\obj\x86\Debug\TetrisContent.contentprojResolveAssemblyReference.cache

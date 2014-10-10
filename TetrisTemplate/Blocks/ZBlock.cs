@@ -5,23 +5,19 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-
-    class IBlock : TetrisBlock
+    class ZBlock : TetrisBlock
     {
-        
-       public IBlock (Texture2D b): base(b)
+        public ZBlock (Texture2D b): base(b)
         
        {
                shape = new Color[4, 4]
         
            {
             {Color.White, Color.White, Color.White, Color.White},
-            {Color.White, Color.White, Color.White, Color.White},
-            {Color.Red,   Color.Red,   Color.Red,   Color.Red},
+            {Color.Yellow, Color.Yellow, Color.White, Color.White},
+            {Color.White,   Color.Yellow,   Color.Yellow,   Color.White},
             {Color.White, Color.White, Color.White, Color.White},
           };
 
         }
     }
-    
-

@@ -110,6 +110,7 @@
     <Compile Include="TetrisBlock.cs" />
     <Compile Include="TetrisGame.cs" />
     <Compile Include="TetrisGrid.cs" />
+    <Compile Include="Blocks\ZBlock.cs" />
   </ItemGroup>
   <ItemGroup>
     <NestedContentProject Include="Content\Content.contentproj">
