@@ -68,8 +68,7 @@ class GameWorld
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
-        if (inputHelper.KeyPressed(Keys.Right) && (tetrisBlock.position.X + block.Width) < screenWidth)
-            tetrisBlock.position.X += block.Width;
+        tetrisBlock.HandleInput(gameTime, inputHelper);
     }
 
     public void Update(GameTime gameTime)

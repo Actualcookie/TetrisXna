@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 class TetrisBlock
 {
     public Vector2 position;
     Texture2D block;
+    Point relPos;
+    
 
     Color[,] shape;
 
@@ -24,6 +27,34 @@ class TetrisBlock
         };
         position = Vector2.Zero;
     }
+
+    public void HandleInput(GameTime gameTime, InputHelper inputHelper)
+    {
+        if (inputHelper.KeyPressed(Keys.Right))
+        {
+            this.position.X += block.Width;
+        }
+
+        if (inputHelper.KeyPressed(Keys.Up))
+        {
+            this.Rotate();
+        }
+    }
+
+    protected void Rotate()
+    {
+        Color[,] shape2 = new Color[4, 4];
+        for (int i = 3; i >= 0; --i)
+            for (int j = 0; j < 4; j++)
+                shape2[j, 3 - i] = shape[i, j];
+        //Store a clockwisely rotated version of shape in shape2
+
+        for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 4; j++)
+                shape[i, j] = shape2[i, j];
+        //Copy the rotated version back to the original
+    }
+
 
     public virtual void Update(GameTime gameTime)
     {

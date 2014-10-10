@@ -24,7 +24,7 @@ class InputHelper
      */
     public InputHelper()
     {
-        keyPressInterval = 100;
+        keyPressInterval = 500;
         timeSinceLastKeyPress = 0;
     }
 
