@@ -11,7 +11,7 @@ class TetrisBlock
     protected Vector2 position;
     Texture2D block;
     Point relPos;
-   protected Color[,] shape;
+    protected Color[,] shape;
 
 
     public TetrisBlock(Texture2D b)
