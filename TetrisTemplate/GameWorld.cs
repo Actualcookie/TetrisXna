@@ -16,7 +16,7 @@ class GameWorld
      */
     enum GameState
     {
-        Playing, GameOver
+      StartScreen, Playing, GameOver
     }
 
     /*
@@ -37,7 +37,7 @@ class GameWorld
     /*
      * sprite for representing a single tetris block element
      */
-    Texture2D block;
+    Texture2D block, introscreen;
 
     /*
      * the current game state
@@ -54,8 +54,8 @@ class GameWorld
         screenWidth = width;
         screenHeight = height;
         random = new Random();
-        gameState = GameState.Playing;
-
+        gameState = GameState.StartScreen;
+        introscreen = Content.Load<Texture2D>("spr_BackGround"); 
         block = Content.Load<Texture2D>("block");
         font = Content.Load<SpriteFont>("SpelFont");
         grid = new TetrisGrid(block);
@@ -68,7 +68,10 @@ class GameWorld
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
-        tetrisBlock.HandleInput(gameTime, inputHelper);
+        if (gameState == GameState.StartScreen && inputHelper.KeyPressed(Keys.Space))
+            gameState = GameState.Playing;
+        if(gameState==GameState.Playing)
+          tetrisBlock.HandleInput(gameTime, inputHelper);
     }
 
     public void Update(GameTime gameTime)
@@ -78,8 +81,16 @@ class GameWorld
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Begin();
-        grid.Draw(gameTime, spriteBatch);
-        tetrisBlock.Draw(gameTime, spriteBatch);
+        if (gameState== GameState.StartScreen)
+        {
+            spriteBatch.Draw(introscreen, Vector2.Zero, Color.White);
+        }
+
+        else if (gameState == GameState.Playing)
+        {
+            grid.Draw(gameTime, spriteBatch);
+            tetrisBlock.Draw(gameTime, spriteBatch);
+        }
         spriteBatch.End();    
     }
 

@@ -54,7 +54,14 @@ class TetrisBlock
                 shape[i, j] = shape2[i, j];
         //Copy the rotated version back to the original
     }
+    
+   /* protected bool Collision()
+    {
+        if( )
+        {
 
+        }
+    }*/
 
     public virtual void Update(GameTime gameTime)
     {
