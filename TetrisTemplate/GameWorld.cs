@@ -29,16 +29,20 @@ class GameWorld
      */
     Random random;
 
+    //position of button on screen
+  protected  Vector2 butPos;
     /*
      * main game font
      */
     SpriteFont font;
 
+    bool pressed; 
+
     /*
      * sprite for representing a single tetris block element
      */
     Texture2D block, introscreen;
-
+    public Texture2D button;
     /*
      * the current game state
      */
@@ -60,19 +64,45 @@ class GameWorld
         font = Content.Load<SpriteFont>("SpelFont");
         grid = new TetrisGrid(block);
         tetrisBlock = new TBlock(block);
+        button = Content.Load<Texture2D>("spr_Button");
+        butPos = new Vector2(screenWidth-button.Width,screenHeight-button.Height );
     }
+
+
 
     public void Reset()
     {
+       
     }
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
-        if (gameState == GameState.StartScreen && inputHelper.KeyPressed(Keys.Space))
+        //chances the gamestates to other gamestate
+        if (gameState==GameState.StartScreen)
+          {
+             int x=(int) 280;
+             int y=(int) 80;
+             Rectangle button = new Rectangle((int)butPos.X, (int)butPos.Y, x , y );
+             pressed = inputHelper.MouseLeftButtonPressed() &&
+               button.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y);
+       }
+
+        if (gameState == GameState.StartScreen && inputHelper.KeyPressed(Keys.Space) ||pressed)
             gameState = GameState.Playing;
         if(gameState==GameState.Playing)
           tetrisBlock.HandleInput(gameTime, inputHelper);
+        if (gameState == GameState.GameOver && inputHelper.KeyPressed(Keys.Space))
+        {
+            gameState = GameState.StartScreen;
+        }
     }
+       
+    
+    public bool Pressed
+    {
+        get { return pressed; }
+    }
+
 
     public void Update(GameTime gameTime)
     {
@@ -84,6 +114,7 @@ class GameWorld
         if (gameState== GameState.StartScreen)
         {
             spriteBatch.Draw(introscreen, Vector2.Zero, Color.White);
+            spriteBatch.Draw(button, butPos,Color.White);
         }
 
         else if (gameState == GameState.Playing)

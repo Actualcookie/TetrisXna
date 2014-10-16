@@ -10,21 +10,14 @@ class TetrisBlock
 {
     protected Vector2 position;
     Texture2D block;
-    Point relPos;
+    //Point relPos;
     protected Color[,] shape;
 
 
     public TetrisBlock(Texture2D b)
     {
         block = b;
-        /*shape = new Color[4, 4]
-      {
-            {Color.White, Color.White, Color.White, Color.White},
-            {Color.White, Color.White, Color.White, Color.White},
-            {Color.Red,   Color.Red,   Color.Red,   Color.Red},
-            {Color.White, Color.White, Color.White, Color.White},
-        };
-         */
+
         position = Vector2.Zero;
     }
 
@@ -33,6 +26,10 @@ class TetrisBlock
         if (inputHelper.KeyPressed(Keys.Right))
         {
             this.position.X += block.Width;
+        }
+        if (inputHelper.KeyPressed(Keys.Left))
+        {
+            this.position.X -= block.Width;
         }
 
         if (inputHelper.KeyPressed(Keys.Up))

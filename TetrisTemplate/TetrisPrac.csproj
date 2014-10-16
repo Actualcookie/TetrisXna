@@ -103,6 +103,7 @@
   <ItemGroup>
     <Compile Include="Blocks\SBlock.cs" />
     <Compile Include="Blocks\OBlock.cs" />
+    <Compile Include="Button1.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="Blocks\IBlock.cs" />
     <Compile Include="InputHelper.cs" />

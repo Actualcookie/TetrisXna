@@ -6,7 +6,7 @@ class InputHelper
     /* 
      * current and previous mouse/keyboard states
      */
-    MouseState currentMouseState, previousMouseState;
+   public MouseState currentMouseState, previousMouseState;
     KeyboardState currentKeyboardState, previousKeyboardState;
 
     /*
