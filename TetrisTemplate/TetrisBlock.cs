@@ -11,6 +11,7 @@ class TetrisBlock
     protected Vector2 position;
     Texture2D block;
     //Point relPos;
+    float movetime;
     protected Color[,] shape;
     public Vector2 SetPosition;
     protected bool moveright, moveleft;
@@ -20,17 +21,23 @@ class TetrisBlock
         block = b;
         SetPosition = new Vector2(4, -1);
         position = Vector2.Zero;
+        moveleft = false;
+        moveright = false;
     }
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
-        if (inputHelper.KeyPressed(Keys.Right)&& moveright)
+        if (inputHelper.KeyPressed(Keys.Right))
         {
             this.position.X += block.Width;
         }
-        if (inputHelper.KeyPressed(Keys.Left)&& moveleft)
+        if (inputHelper.KeyPressed(Keys.Left))
         {
             this.position.X -= block.Width;
+        }
+        if (movetime==10|| movetime==4)
+        {
+            this.position.Y += block.Height;
         }
 
         if (inputHelper.KeyPressed(Keys.Up))
@@ -40,32 +47,31 @@ class TetrisBlock
     }
 
 
-    public bool CheckBorderLeft()
+   /* public bool CheckBorderLeft()
     {
         for (int x = 0; x < shape.GetLength(0); x++)
             for (int y = 0; y < shape.GetLength(1); y++)
-                if (this.shape[x, y] != Color.White)
+                if (this.shape[x, y] == Color.White)
                 {
 
                     if (position.X == block.Width * 12 + block.Width * x)
-                        moveleft = false;
+                        moveleft = true;
 
                 }
-        return moveleft = true;
+        return moveleft = false;
     }
 
     public bool CheckBorderRight()
     {
         for (int x = 0; x < shape.GetLength(0); x++)
             for (int y = 0; y < shape.GetLength(1); y++)
-                if (this.shape[x, y] != Color.White)
+                if (this.shape[x, y] == Color.White)
                 {
                     if (position.X == (12 - 1) * block.Width)
-                        moveright= false;
+                        moveright= true;
                 }
-
-      return moveright = true;
-    }
+        return moveright = false;
+    }*/
    /* public TetrisGrid RandomBlok()
     {
 
@@ -94,8 +100,8 @@ class TetrisBlock
     }*/
 
     public virtual void Update(GameTime gameTime)
-    {
-       
+    {  
+        movetime = gameTime.ElapsedGameTime.Milliseconds;
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch s)

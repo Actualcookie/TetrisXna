@@ -60,30 +60,27 @@ class TetrisGrid
      * draws the grid on the screen
      */
 
-    public void Update(GameTime gameTime)
+    public bool Update(GameTime gameTime)
     {
-        for(int y = 0; y < 20; y++)
+        for (int y = 0; y < 20; y++)
         {
             bool del = true;
-            for(int x = 0; x < 12; x++)
+            for (int x = 0; x < 12; x++)
             {
                 if (colGrid[x, y] == Color.White)
                     del = false;
             }
-            //if (del)
-              //  ClearRow(y);
+            if (del)
+                ClearRow(y);
         }
-    }
-
-    
         return false;
     }
-
+  
     public void Draw(GameTime gameTime, SpriteBatch s)
     {
-        for (int t = 0; t < 12; x++)
-            for (int n = 0; n < 20; y++)
-                s.Draw(gridblock, new Vector2((position.X + x * gridblock.Width), (position.Y + y * gridblock.Height));, colGrid[t,n]);
+        for (int t = 0; t < 12; t++)
+            for (int n = 0; n < 20; n++)
+                s.Draw(gridblock, new Vector2(position.X + t * gridblock.Width, position.Y + n * gridblock.Height), colGrid[t,n]);
     }
 
     public void ClearRow(int row)
