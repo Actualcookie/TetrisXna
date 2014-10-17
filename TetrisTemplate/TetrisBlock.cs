@@ -12,22 +12,23 @@ class TetrisBlock
     Texture2D block;
     //Point relPos;
     protected Color[,] shape;
-
+    public Vector2 SetPosition;
+    protected bool moveright, moveleft;
 
     public TetrisBlock(Texture2D b)
     {
         block = b;
-
+        SetPosition = new Vector2(4, -1);
         position = Vector2.Zero;
     }
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
-        if (inputHelper.KeyPressed(Keys.Right))
+        if (inputHelper.KeyPressed(Keys.Right)&& moveright)
         {
             this.position.X += block.Width;
         }
-        if (inputHelper.KeyPressed(Keys.Left))
+        if (inputHelper.KeyPressed(Keys.Left)&& moveleft)
         {
             this.position.X -= block.Width;
         }
@@ -37,6 +38,38 @@ class TetrisBlock
             this.Rotate();
         }
     }
+
+
+    public bool CheckBorderLeft()
+    {
+        for (int x = 0; x < shape.GetLength(0); x++)
+            for (int y = 0; y < shape.GetLength(1); y++)
+                if (this.shape[x, y] != Color.White)
+                {
+
+                    if (position.X == block.Width * 12 + block.Width * x)
+                        moveleft = false;
+
+                }
+        return moveleft = true;
+    }
+
+    public bool CheckBorderRight()
+    {
+        for (int x = 0; x < shape.GetLength(0); x++)
+            for (int y = 0; y < shape.GetLength(1); y++)
+                if (this.shape[x, y] != Color.White)
+                {
+                    if (position.X == (12 - 1) * block.Width)
+                        moveright= false;
+                }
+
+      return moveright = true;
+    }
+   /* public TetrisGrid RandomBlok()
+    {
+
+    }*/
 
     protected void Rotate()
     {

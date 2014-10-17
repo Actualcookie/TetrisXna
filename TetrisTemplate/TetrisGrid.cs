@@ -1,14 +1,17 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 /*
  * a class for representing the Tetris playing grid
  */
 class TetrisGrid
 {
-    Color[,] colGrid = new Color[12, 20];
+   public Color[,] colGrid = new Color[12, 20];
+    
     public TetrisGrid(Texture2D b)
     {
         gridblock = b;
@@ -67,15 +70,20 @@ class TetrisGrid
                 if (colGrid[x, y] == Color.White)
                     del = false;
             }
-            if (del)
-                ClearRow(y);
+            //if (del)
+              //  ClearRow(y);
         }
     }
+
+    
+        return false;
+    }
+
     public void Draw(GameTime gameTime, SpriteBatch s)
     {
-        for (int x = 0; x < 12; x++)
-            for (int y = 0; y < 20; y++)
-                s.Draw(gridblock, new Vector2(position.X + x * gridblock.Width, position.Y + y * gridblock.Height), colGrid[x,y]);
+        for (int t = 0; t < 12; x++)
+            for (int n = 0; n < 20; y++)
+                s.Draw(gridblock, new Vector2((position.X + x * gridblock.Width), (position.Y + y * gridblock.Height));, colGrid[t,n]);
     }
 
     public void ClearRow(int row)

@@ -20,7 +20,9 @@ class TetrisGame : Game
         
         // set the directory where game assets are located
         this.Content.RootDirectory = "Content";
-        
+
+        //makes mouse visible for clicking on things
+        this.IsMouseVisible = true;
         // set the desired window size
         graphics.PreferredBackBufferWidth = 800;
         graphics.PreferredBackBufferHeight = 600;

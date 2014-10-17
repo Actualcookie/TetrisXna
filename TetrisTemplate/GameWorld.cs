@@ -68,8 +68,6 @@ class GameWorld
         butPos = new Vector2(screenWidth-button.Width,screenHeight-button.Height );
     }
 
-
-
     public void Reset()
     {
        
@@ -114,7 +112,7 @@ class GameWorld
         if (gameState== GameState.StartScreen)
         {
             spriteBatch.Draw(introscreen, Vector2.Zero, Color.White);
-            spriteBatch.Draw(button, butPos,Color.White);
+            spriteBatch.Draw(button, butPos,Color.Red);
         }
 
         else if (gameState == GameState.Playing)
