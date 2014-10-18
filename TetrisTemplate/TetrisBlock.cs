@@ -13,13 +13,19 @@ class TetrisBlock
     //Point relPos;
     double movetime;
     protected Color[,] shape;
+<<<<<<< HEAD
     //protected bool moveright, moveleft;
+=======
+    protected bool moveright, moveleft;
+    float speed;
+>>>>>>> be93cc33722dd31cdee4e1797d5eb08e4b2e277d
 
     public TetrisBlock(Texture2D b)
     {
         block = b;
         position = Vector2.Zero;
         movetime = 0;
+        speed = 10;
     }
 
 
@@ -44,7 +50,11 @@ class TetrisBlock
         //should move the Tetromino down
         if (inputHelper.IsKeyDown(Keys.Down)&&GroundCollision()==false)
         {
+<<<<<<< HEAD
             this.position.Y += block.Width;
+=======
+            this.position.Y += 0.5f * speed;
+>>>>>>> be93cc33722dd31cdee4e1797d5eb08e4b2e277d
 
         }
         //rotates the Tetromino
@@ -81,7 +91,9 @@ class TetrisBlock
      }
 
     public virtual void Update(GameTime gameTime)
-    {  
+    {
+        speed = 10 + 10 * TetrisGame.GameWorld.Grid.Level;
+        position.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
     }
 
