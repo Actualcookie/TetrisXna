@@ -89,7 +89,7 @@ class TetrisBlock
                 }
     }
 
-    public bool Collision(TetrisGrid grid)
+    public bool Collision()
     {
         //checks if a Tetromino will intersect
         for (int x = 0; x < shape.GetLength(0); x++)
@@ -97,7 +97,7 @@ class TetrisBlock
             {
                 if (shape[x, y] != Color.White)
                 {
-                    if (grid.colGrid[((int)position.X + x * block.Width) / block.Width, ((int)position.Y + ((y + 1) * + block.Height)) / block.Height] != Color.White)
+                    if (TetrisGame.GameWorld.Grid.colGrid[((int)position.X + x * block.Width) / block.Width, ((int)position.Y + ((y + 1) * + block.Height)) / block.Height] != Color.White)
                     {
                         return true;
                     }

@@ -35,7 +35,7 @@ class TetrisGrid
         for (int x = 0; x < colGrid.GetLength(0); x++)
             for (int y = 0; y < 20; y++)
                 colGrid[x, y] = Color.White;
-        nextblock = RandomBlock();
+        currentblock = RandomBlock();
 
     }
     //Width on the grid
@@ -78,7 +78,7 @@ class TetrisGrid
            currentblock = nextblock ;
            nextblock = RandomBlock();
         }  */
-
+       
         
         for (int y = 0; y < 20; y++)
         {
@@ -121,7 +121,7 @@ class TetrisGrid
     public TetrisBlock RandomBlock()
     {
         TetrisBlock b;
-        switch (TetrisGame.Random.Next(7)){
+        switch (TetrisGame.GameWorld.Random.Next(7)){
             case 0: 
                 b = new IBlock(gridblock);
                 return b;

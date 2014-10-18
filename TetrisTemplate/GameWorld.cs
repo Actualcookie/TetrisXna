@@ -135,4 +135,9 @@ class GameWorld
     {
         get { return random; }
     }
+
+    public TetrisGrid Grid
+    {
+        get { return grid; }
+    }
 }

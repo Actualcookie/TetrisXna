@@ -6,8 +6,7 @@ class TetrisGame : Game
 {
     SpriteBatch spriteBatch;
     InputHelper inputHelper;
-    GameWorld gameWorld;
-    static Random random;
+    static GameWorld gameWorld;
 
     static void Main(string[] args)
     {
@@ -32,7 +31,6 @@ class TetrisGame : Game
         // create the input helper object
         inputHelper = new InputHelper();
 
-        random = new Random();
     } 
 
     protected override void LoadContent()
@@ -57,9 +55,9 @@ class TetrisGame : Game
         gameWorld.Draw(gameTime, spriteBatch);
     }
 
-    public static Random Random
+    public static GameWorld GameWorld
     {
-        get { return random; }
+        get { return gameWorld; }
     }
 }
 
