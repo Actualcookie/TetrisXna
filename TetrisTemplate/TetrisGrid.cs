@@ -26,7 +26,7 @@ class TetrisGrid
     /*
      * width in terms of grid elements
      */
-    TetrisBlock currentblock, nextblock;
+    public TetrisBlock currentblock, nextblock;
 
     public TetrisGrid(Texture2D b)
     {
@@ -104,8 +104,9 @@ class TetrisGrid
            currentblock = nextblock ;
            nextblock = RandomBlock();
         }  */
-       
-        
+
+        currentblock.Update(gameTime);
+
         for (int y = 0; y < 20; y++)
         {
             bool del = true;
@@ -125,6 +126,7 @@ class TetrisGrid
   
     public void Draw(GameTime gameTime, SpriteBatch s)
     {
+        
         //Draws the Grid on the screen in the correct colors
         for (int x = 0; x < colGrid.GetLength(0); x++)
             for (int y = 0; y < colGrid.GetLength(1); y++)
@@ -133,6 +135,8 @@ class TetrisGrid
         for (int x = 0; x < nextblock.Shape.GetLength(0); x++)
             for (int y = 0; y < nextblock.Shape.GetLength(1); y++)
                 s.Draw(gridblock, new Vector2(position.X + (x + 14) * gridblock.Width, position.Y + (y + 1) * gridblock.Height), nextblock.Shape[x, y]);
+
+        currentblock.Draw(gameTime, s);
     }
 
     public void ClearRow(int row)

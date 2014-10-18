@@ -11,7 +11,6 @@ using System;
  */
 class GameWorld
 {
-    TetrisBlock tetrisBlock;
      /*
      * enum for different game states (playing or game over)
      */
@@ -67,7 +66,6 @@ class GameWorld
         block = Content.Load<Texture2D>("block");
         font = Content.Load<SpriteFont>("SpelFont");
         grid = new TetrisGrid(block);
-        tetrisBlock = new TBlock(block);
         button = Content.Load<Texture2D>("spr_Button");
         butPos = new Vector2(screenWidth-button.Width,screenHeight-button.Height );
     }
@@ -95,7 +93,7 @@ class GameWorld
             gameState = GameState.Playing;
             
         if(gameState==GameState.Playing)
-          tetrisBlock.HandleInput(gameTime, inputHelper);
+          grid.currentblock.HandleInput(gameTime, inputHelper);
           
         if (gameState == GameState.GameOver && inputHelper.KeyPressed(Keys.Space))
         {
@@ -112,7 +110,7 @@ class GameWorld
 
     public void Update(GameTime gameTime)
     {
-
+        grid.Update(gameTime);
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -127,7 +125,6 @@ class GameWorld
         else if (gameState == GameState.Playing)
         {
             grid.Draw(gameTime, spriteBatch);
-            tetrisBlock.Draw(gameTime, spriteBatch);
             spriteBatch.DrawString(font, "Score:"/*+score*/, new Vector2(screenWidth+block.Width, screenHeight) / 2, Color.Black);
             spriteBatch.DrawString(font, "Level:"/*+level*/, new Vector2(screenWidth + block.Width, screenHeight+block.Width) / 2, Color.Black);
         }
