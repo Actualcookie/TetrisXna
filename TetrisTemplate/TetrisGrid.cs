@@ -31,7 +31,7 @@ class TetrisGrid
     public TetrisGrid(Texture2D b)
     {
         //draws the grid
-        level = score / 30;
+        
         gridblock = b;
         position = Vector2.Zero;
         for (int x = 1; x < 13; x++)
@@ -51,13 +51,12 @@ class TetrisGrid
         {
             for (int x = 0; x < 4; x++)
                 for (int y = 0; y < 4; y++)
-                    //if (currentblock.Shape[x, y] != Color.White)//moet nog een timer hebben net als het naar beneden bewegen
+                   if (currentblock.Shape[x, y] != Color.White)//moet nog een timer hebben net als het naar beneden bewegen
                     {
-                        colGrid[((int)position.X + x * gridblock.Width) / gridblock.Width, ((int)position.Y + ((y + 1) * +gridblock.Height)) / gridblock.Height] = currentblock.Shape[x,y];
+                        colGrid[((int)currentblock.Position.X + x * gridblock.Width) / gridblock.Width, ((int)currentblock.Position.Y + (y * +gridblock.Height)) / gridblock.Height] = currentblock.Shape[x,y];
                     }
           }
         }
-
 
 
     // Method checks if top row of the Grid contains a Tetromino
@@ -100,14 +99,14 @@ class TetrisGrid
     public void Update(GameTime gameTime)
     {
         //Shows block on screen
-      /* if (Collision && movetime == 0)
+       if (currentblock.Collision()||currentblock.GroundCollision())
         {
            currentblock = nextblock ;
            nextblock = RandomBlock();
-        }  */
+        } 
 
         currentblock.Update(gameTime);
-
+        ReturntoGrid();
         for (int y = 0; y < 20; y++)
         {
             bool del = true;
@@ -120,6 +119,7 @@ class TetrisGrid
             {
                 ClearRow(y);
                 score += 10;
+                level = score / 30;
             }
         }
      

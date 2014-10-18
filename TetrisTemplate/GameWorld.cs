@@ -94,14 +94,14 @@ class GameWorld
             gameState = GameState.Playing;
             
         if(gameState==GameState.Playing)
-<<<<<<< HEAD
-          tetrisBlock.HandleInput(gameTime, inputHelper);
+
+          grid.currentblock.HandleInput(gameTime, inputHelper);
         if (gameState == GameState.Playing && inputHelper.KeyPressed(Keys.Space))
            
             gameState = GameState.StartScreen;
-=======
+
           grid.currentblock.HandleInput(gameTime, inputHelper);
->>>>>>> be93cc33722dd31cdee4e1797d5eb08e4b2e277d
+
           
         if (gameState == GameState.GameOver && inputHelper.KeyPressed(Keys.Space))
         {
@@ -133,15 +133,10 @@ class GameWorld
         else if (gameState == GameState.Playing)
         {
             grid.Draw(gameTime, spriteBatch);
-<<<<<<< HEAD
-            tetrisBlock.Draw(gameTime, spriteBatch);
+
+            grid.currentblock.Draw(gameTime, spriteBatch);
             spriteBatch.DrawString(font, "Score:" + grid.Score, new Vector2(screenWidth + block.Width, screenHeight) / 2, Color.Black);
             spriteBatch.DrawString(font, "Level:" + grid.Level, new Vector2(screenWidth + block.Width, screenHeight+block.Width) / 2, Color.Black);
-
-=======
-            spriteBatch.DrawString(font, "Score:"/*+score*/, new Vector2(screenWidth+block.Width, screenHeight) / 2, Color.Black);
-            spriteBatch.DrawString(font, "Level:"/*+level*/, new Vector2(screenWidth + block.Width, screenHeight+block.Width) / 2, Color.Black);
->>>>>>> be93cc33722dd31cdee4e1797d5eb08e4b2e277d
         }
         else if (gameState == GameState.GameOver)
             spriteBatch.DrawString(font, "Game Over: /n Press <space> to try again", new Vector2(screenWidth, screenHeight) / 2,Color.Black);

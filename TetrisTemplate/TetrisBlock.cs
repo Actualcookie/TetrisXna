@@ -11,20 +11,14 @@ class TetrisBlock
     protected Vector2 position;
     Texture2D block;
     //Point relPos;
-    double movetime;
     protected Color[,] shape;
-<<<<<<< HEAD
-    //protected bool moveright, moveleft;
-=======
-    protected bool moveright, moveleft;
     float speed;
->>>>>>> be93cc33722dd31cdee4e1797d5eb08e4b2e277d
+
 
     public TetrisBlock(Texture2D b)
     {
         block = b;
         position = Vector2.Zero;
-        movetime = 0;
         speed = 10;
     }
 
@@ -34,27 +28,20 @@ class TetrisBlock
         //moves Tetromino right
         if (inputHelper.KeyPressed(Keys.Right))
         {
-            this.position.X += block.Width;
+            this.position.X += (block.Width/2);
         }
         //moves Tetromino Left
         if (inputHelper.KeyPressed(Keys.Left))
         {
-            this.position.X -= block.Width;
-        }
-        //moves Tetromino down on it's own
-       /* if (Timer== 500 Miliseconds) // dit is gewoon nog niet aangegeven
-        {
-            this.position.Y += block.Height;
-        }*/
-
+            this.position.X -= (block.Width/2);
+        }  
         //should move the Tetromino down
         if (inputHelper.IsKeyDown(Keys.Down)&&GroundCollision()==false)
         {
-<<<<<<< HEAD
+
             this.position.Y += block.Width;
-=======
             this.position.Y += 0.5f * speed;
->>>>>>> be93cc33722dd31cdee4e1797d5eb08e4b2e277d
+
 
         }
         //rotates the Tetromino
@@ -67,8 +54,7 @@ class TetrisBlock
    public  Color[,] Shape
       {
           get { return shape;}
-      }
-
+      }    
      protected void Rotate()
     {
         Color[,] shape2 = new Color[4, 4];
@@ -83,17 +69,18 @@ class TetrisBlock
         //Copy the rotated version back to the original
     }
     
-    public void TimeToMove(GameTime gameTime)
-     {
-         if (movetime > 500)
-             movetime = 0;
-         else movetime += gameTime.ElapsedGameTime.TotalMilliseconds;
-     }
+
 
     public virtual void Update(GameTime gameTime)
     {
-        speed = 10 + 10 * TetrisGame.GameWorld.Grid.Level;
-        position.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        if (!Collision()||!GroundCollision())
+        {
+            speed = 10 + 10 * TetrisGame.GameWorld.Grid.Level;
+            position.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        }
+        GroundCollision();
+        Collision();
+
 
     }
 
@@ -106,6 +93,10 @@ class TetrisBlock
                     s.Draw(block, new Vector2(position.X + x * block.Width, position.Y + y * block.Height), shape[x, y]);
                 }
     }
+    public Vector2 Position
+    {
+        get { return position; }
+    }    
 
    public bool GroundCollision()
     {
@@ -115,7 +106,7 @@ class TetrisBlock
           
                 if (this.Shape[x,y] != Color.White)
                      {
-                        if ((position.Y + ((y+2)  * block.Height) > 20*block.Height))
+                        if ((position.Y + ((y+1)  * block.Height) > 20*block.Height))
                          {
                              return true;
                             }
@@ -129,14 +120,12 @@ class TetrisBlock
         for (int x = 0; x < Shape.GetLength(0); x++)
             for (int y = 0; y < Shape.GetLength(1); y++)
             {
-                if (this.Shape[x, y] != Color.White)
-                {
-                    if (TetrisGame.GameWorld.Grid.colGrid[((int)position.X + x * block.Width) / block.Width, ((int)position.Y + ((y + 1) * + block.Height)) / block.Height] != Color.White)
-                    {
+                 if (this.Shape[x, y] != Color.White)
+                     if (TetrisGame.GameWorld.Grid.colGrid[((int)position.X + x * block.Width) / block.Width, ((int)position.Y + ((y + 1) * +block.Height)) / block.Height] != Color.White)
+                  {
                         return true;
-                    }
-                }
-            }
+                  }
+               }
         return false;
     }
 }
