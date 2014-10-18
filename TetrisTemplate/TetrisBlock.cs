@@ -11,16 +11,14 @@ class TetrisBlock
     protected Vector2 position;
     public Texture2D block;
     //Point relPos;
-    float movetime;
+    double movetime;
     public Color[,] shape;
-    protected bool moveright, moveleft;
 
     public TetrisBlock(Texture2D b)
     {
         block = b;
         position = Vector2.Zero;
-        moveleft = false;
-        moveright = false;
+        movetime = 0;
     }
 
 
@@ -36,15 +34,16 @@ class TetrisBlock
         {
             this.position.X -= block.Width;
         }
-        if(movetime==1)
+        //moves Tetromino down on it's own
+       /* if (Timer== 500 Miliseconds) // dit is gewoon nog niet aangegeven
         {
             this.position.Y += block.Height;
-        }
+        }*/
        
         //should move the Tetromino down
         if (inputHelper.KeyPressed(Keys.Down))
         {
-            this.position.Y = position.Y+ 10* block.Height;
+            this.position.Y +=  block.Height;
         }
         //rotates the Tetromino
         if (inputHelper.KeyPressed(Keys.Up))
@@ -73,11 +72,16 @@ class TetrisBlock
         //Copy the rotated version back to the original
     }
     
+    public void TimeToMove(GameTime gameTime)
+     {
+         if (movetime > 500)
+             movetime = 0;
+         else movetime += gameTime.ElapsedGameTime.TotalMilliseconds;
+     }
 
     public virtual void Update(GameTime gameTime)
     {  
 
-        movetime = gameTime.TotalGameTime.Milliseconds % 500;//moet nog gedeeld door het huidige level
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch s)

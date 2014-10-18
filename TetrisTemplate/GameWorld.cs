@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Input;
 using System;
 
@@ -14,11 +15,11 @@ class GameWorld
      /*
      * enum for different game states (playing or game over)
      */
-    enum GameState
+   protected enum GameState
     {
       StartScreen, Playing, GameOver
     }
-
+  public Song introsong, playingsong;
     /*
      * screen width and height
      */
@@ -55,6 +56,9 @@ class GameWorld
 
     public GameWorld(int width, int height, ContentManager Content)
     {
+        introsong = Content.Load<Song>("IntroSong");
+        playingsong = Content.Load<Song>("TetrisPlaying");
+        MediaPlayer.Play(introsong);
         screenWidth = width;
         screenHeight = height;
         random = new Random();
@@ -68,6 +72,7 @@ class GameWorld
         butPos = new Vector2(screenWidth-button.Width,screenHeight-button.Height );
     }
 
+  
     public void Reset()
     {
        
@@ -77,7 +82,8 @@ class GameWorld
     {
         //chances the gamestates to other gamestate
         if (gameState==GameState.StartScreen)
-          {
+        {
+           
              int x=(int) 280;
              int y=(int) 80;
              Rectangle button = new Rectangle((int)butPos.X, (int)butPos.Y, x , y );
@@ -87,39 +93,46 @@ class GameWorld
 
         if (gameState == GameState.StartScreen && inputHelper.KeyPressed(Keys.Space) ||pressed)
             gameState = GameState.Playing;
+            
         if(gameState==GameState.Playing)
           tetrisBlock.HandleInput(gameTime, inputHelper);
+          
         if (gameState == GameState.GameOver && inputHelper.KeyPressed(Keys.Space))
         {
+            
             gameState = GameState.StartScreen;
         }
     }
-       
+
     
     public bool Pressed
     {
         get { return pressed; }
     }
 
-
     public void Update(GameTime gameTime)
     {
+
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Begin();
-        if (gameState== GameState.StartScreen)
+        if (gameState == GameState.StartScreen)
         {
             spriteBatch.Draw(introscreen, Vector2.Zero, Color.White);
-            spriteBatch.Draw(button, butPos,Color.Red);
+            spriteBatch.Draw(button, butPos, Color.Red);
         }
 
         else if (gameState == GameState.Playing)
         {
             grid.Draw(gameTime, spriteBatch);
             tetrisBlock.Draw(gameTime, spriteBatch);
+            spriteBatch.DrawString(font, "Score:"/*+score*/, new Vector2(screenWidth+block.Width, screenHeight) / 2, Color.Black);
+            spriteBatch.DrawString(font, "Level:"/*+level*/, new Vector2(screenWidth + block.Width, screenHeight+block.Width) / 2, Color.Black);
         }
+        else if (gameState == GameState.GameOver)
+            spriteBatch.DrawString(font, "Game Over: /n Press <space> to try again", new Vector2(screenWidth, screenHeight) / 2,Color.Black);
         spriteBatch.End();    
     }
 

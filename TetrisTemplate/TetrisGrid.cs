@@ -11,7 +11,7 @@ using System;
 class TetrisGrid
 {
    public Color[,] colGrid = new Color[12, 22];
-
+   public int score, level;
     /*
      * sprite for representing a single grid block
      */
@@ -28,6 +28,8 @@ class TetrisGrid
 
     public TetrisGrid(Texture2D b)
     {
+        //draws the grid
+        level = score / 30;
         gridblock = b;
         position = Vector2.Zero;
         for (int x = 0; x < colGrid.GetLength(0); x++)
@@ -36,7 +38,7 @@ class TetrisGrid
 
     }
     //Width on the grid
-   /*public bool Collision()
+/*  public bool Collision()
     {
        //checks if a Tetromino will intersect
         for (int x = 0; x < shape.GetLength(0); x++)
@@ -65,9 +67,20 @@ class TetrisGrid
                 }
 
         }
-    */
- 
-    
+
+
+    // Method checks if top row of the Grid contains a Tetromino
+    public bool TopRow()
+    {
+        for (int g = 0; g < colGrid.GetLength(0); g++)
+            if (colGrid[g, 0] != Color.White)
+            {
+
+            }
+        return false;
+    }
+ */
+
     public int Width
     {
         get { return 12; }
@@ -80,8 +93,18 @@ class TetrisGrid
     {
         get { return 20; }
     }
+    //current score
+    public int Score
+    {
+        get { return score; }
+    }
+    //currentlevel
+    public int Level
+    {
+        get { return level; }
+    }
 
-
+   
     public bool Update(GameTime gameTime)
     {
         //Shows block on screen
@@ -101,7 +124,10 @@ class TetrisGrid
                     del = false;
             }
             if (del)
+            {
                 ClearRow(y);
+                score += 10;
+            }
         }
      
        return false;
