@@ -9,10 +9,16 @@ using Microsoft.Xna.Framework.Input;
 class TetrisBlock
 {
     protected Vector2 position;
-    public Texture2D block;
+    Texture2D block;
     //Point relPos;
+<<<<<<< HEAD
     double movetime;
     public Color[,] shape;
+=======
+    float movetime;
+    protected Color[,] shape;
+    protected bool moveright, moveleft;
+>>>>>>> e0eb4fa2f9dd7c20c2ca3870e1ac79633e110d74
 
     public TetrisBlock(Texture2D b)
     {
@@ -41,9 +47,13 @@ class TetrisBlock
         }*/
        
         //should move the Tetromino down
-        if (inputHelper.KeyPressed(Keys.Down))
+        if (inputHelper.IsKeyDown(Keys.Down))
         {
+<<<<<<< HEAD
             this.position.Y +=  block.Height;
+=======
+            this.position.Y += 20;
+>>>>>>> e0eb4fa2f9dd7c20c2ca3870e1ac79633e110d74
         }
         //rotates the Tetromino
         if (inputHelper.KeyPressed(Keys.Up))
@@ -52,11 +62,10 @@ class TetrisBlock
         }
     }
 
-   /*  public  Color[,]Shape()
+   public  Color[,] Shape
       {
-          get
-         { return shape;}
-      }*/
+          get { return shape;}
+      }
 
      protected void Rotate()
     {
@@ -94,5 +103,20 @@ class TetrisBlock
                 }
     }
 
-
+    public bool Collision(TetrisGrid grid)
+    {
+        //checks if a Tetromino will intersect
+        for (int x = 0; x < shape.GetLength(0); x++)
+            for (int y = 0; y < shape.GetLength(1); y++)
+            {
+                if (shape[x, y] != Color.White)
+                {
+                    if (grid.colGrid[((int)position.X + x * block.Width) / block.Width, ((int)position.Y + ((y + 1) * + block.Height)) / block.Height] != Color.White)
+                    {
+                        return true;
+                    }
+                }
+            }
+        return false;
+    }
 }

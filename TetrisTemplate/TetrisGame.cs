@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -6,6 +7,7 @@ class TetrisGame : Game
     SpriteBatch spriteBatch;
     InputHelper inputHelper;
     GameWorld gameWorld;
+    static Random random;
 
     static void Main(string[] args)
     {
@@ -29,6 +31,8 @@ class TetrisGame : Game
 
         // create the input helper object
         inputHelper = new InputHelper();
+
+        random = new Random();
     } 
 
     protected override void LoadContent()
@@ -51,6 +55,11 @@ class TetrisGame : Game
     {
         GraphicsDevice.Clear(Color.White);
         gameWorld.Draw(gameTime, spriteBatch);
+    }
+
+    public static Random Random
+    {
+        get { return random; }
     }
 }
 
