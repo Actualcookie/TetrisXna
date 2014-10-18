@@ -11,14 +11,9 @@ class TetrisBlock
     protected Vector2 position;
     Texture2D block;
     //Point relPos;
-<<<<<<< HEAD
     double movetime;
-    public Color[,] shape;
-=======
-    float movetime;
     protected Color[,] shape;
     protected bool moveright, moveleft;
->>>>>>> e0eb4fa2f9dd7c20c2ca3870e1ac79633e110d74
 
     public TetrisBlock(Texture2D b)
     {
@@ -49,11 +44,9 @@ class TetrisBlock
         //should move the Tetromino down
         if (inputHelper.IsKeyDown(Keys.Down))
         {
-<<<<<<< HEAD
             this.position.Y +=  block.Height;
-=======
             this.position.Y += 20;
->>>>>>> e0eb4fa2f9dd7c20c2ca3870e1ac79633e110d74
+
         }
         //rotates the Tetromino
         if (inputHelper.KeyPressed(Keys.Up))

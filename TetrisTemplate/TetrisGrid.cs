@@ -38,33 +38,15 @@ class TetrisGrid
             for (int y = 0; y < 20; y++)
                 colGrid[x, y] = Color.White;
         currentblock = RandomBlock();
+        nextblock = RandomBlock();
 
     }
-    //Width on the grid
-<<<<<<< HEAD
-/*  public bool Collision()
-    {
-       //checks if a Tetromino will intersect
-        for (int x = 0; x < shape.GetLength(0); x++)
-            for (int y = 0; y <shape.GetLength(1); y++)
-            {
-                if (shape[x, y] != Color.White)
-                {
-                    if (colGrid[((int)position.X + x * gridblock.Width) / gridblock.Width, ((int)position.Y + ((y + 1) * + gridblock.Height)) / gridblock.Height] != Color.White)
-                    {
-                        return true;
-                    }
-                }
-            }
-        return false;
-    }
-=======
 
->>>>>>> e0eb4fa2f9dd7c20c2ca3870e1ac79633e110d74
+
     public void ReturntoGrid()
     {
         //writes the shape grid to the main grid
-        if (currentblock.Collision(this))
+        if (currentblock.Collision())
         {
             for (int x = 0; x < 4; x++)
                 for (int y = 0; y < 4; y++)
@@ -73,7 +55,8 @@ class TetrisGrid
                         colGrid[((int)position.X + x * gridblock.Width) / gridblock.Width, ((int)position.Y + ((y + 1) * +gridblock.Height)) / gridblock.Height] = currentblock.Shape[x,y];
                     }
         }
-<<<<<<< HEAD
+        }
+
 
 
     // Method checks if top row of the Grid contains a Tetromino
@@ -85,15 +68,10 @@ class TetrisGrid
 
             }
         return false;
-    }
- */
-
-=======
-    }
-    
+    }  
  
     
->>>>>>> e0eb4fa2f9dd7c20c2ca3870e1ac79633e110d74
+
     public int Width
     {
         get { return 12; }
@@ -118,7 +96,7 @@ class TetrisGrid
     }
 
    
-    public bool Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
         //Shows block on screen
       /* if (Collision && movetime == 0)
@@ -143,7 +121,6 @@ class TetrisGrid
             }
         }
      
-       return false;
     }
   
     public void Draw(GameTime gameTime, SpriteBatch s)
@@ -171,8 +148,9 @@ class TetrisGrid
 
     public TetrisBlock RandomBlock()
     {
+        int num = GameWorld.Random.Next(7);
         TetrisBlock b;
-        switch (TetrisGame.GameWorld.Random.Next(7)){
+        switch (num){
             case 0: 
                 b = new IBlock(gridblock);
                 return b;

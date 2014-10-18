@@ -28,7 +28,7 @@ class GameWorld
     /*
      * random number generator
      */
-    Random random;
+    static Random random;
 
     //position of button on screen
   protected  Vector2 butPos;
@@ -144,7 +144,7 @@ class GameWorld
         spriteBatch.DrawString(font, text, positie, Color.Blue);
     }
 
-    public Random Random
+    public static Random Random
     {
         get { return random; }
     }
