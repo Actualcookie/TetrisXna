@@ -10,7 +10,7 @@ using System;
  */
 class TetrisGrid
 {
-   public Color[,] colGrid = new Color[12, 20];
+   public Color[,] colGrid = new Color[12, 22];
 
     /*
      * sprite for representing a single grid block
@@ -31,11 +31,43 @@ class TetrisGrid
         gridblock = b;
         position = Vector2.Zero;
         for (int x = 0; x < colGrid.GetLength(0); x++)
-            for (int y = 0; y < colGrid.GetLength(1); y++)
+            for (int y = 0; y < 20; y++)
                 colGrid[x, y] = Color.White;
 
     }
     //Width on the grid
+   /*public bool Collision()
+    {
+       //checks if a Tetromino will intersect
+        for (int x = 0; x < shape.GetLength(0); x++)
+            for (int y = 0; y <shape.GetLength(1); y++)
+            {
+                if (shape[x, y] != Color.White)
+                {
+                    if (colGrid[((int)position.X + x * gridblock.Width) / gridblock.Width, ((int)position.Y + ((y + 1) * + gridblock.Height)) / gridblock.Height] != Color.White)
+                    {
+                        return true;
+                    }
+                }
+            }
+        return false;
+    }
+    public void ReturntoGrid()
+    {
+        //writes the shape grid to the main grid
+        if (Collision())
+        {
+            for(int x= 0; x < 4; x++)
+                for(int y= 0; y < 4; y++)
+                 if(shape[x,y]!= Color.White )//moet nog een timer hebben net als het naar beneden bewegen
+                {
+                    colGrid[((int)position.X + x * gridblock.Width) / gridblock.Width, ((int)position.Y + ((y + 1) * +gridblock.Height)) / gridblock.Height] = shape;
+                }
+
+        }
+    */
+ 
+    
     public int Width
     {
         get { return 12; }
@@ -48,26 +80,18 @@ class TetrisGrid
     {
         get { return 20; }
     }
-    public bool Collision()
-    {
-        for (int x = 0; x < shape.GetLength(0); x++)
-            for (int y = 0; y < shape.GetLength(1); y++)
-            {
-                if (shape[x, y] != Color.White)
-                {
-                    if (colGrid[(position.X + x * block.Width) / block.Width, (position.Y + ((y + 1) * +block.Height)) / block.Height] != Color.White)
-                    {
-                        return true;
-                    }
-                }
-            }
-        return false;
-    }
 
 
     public bool Update(GameTime gameTime)
     {
-        //entire method dedicated to clearing rows in the tetrisgrid
+        //Shows block on screen
+      /*  if (Collision && movetime == 0)
+        {
+           currentblock = nextblock ;
+           nextblock = blockcalled;
+        }  */
+
+        
         for (int y = 0; y < 20; y++)
         {
             bool del = true;

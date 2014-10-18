@@ -23,60 +23,43 @@ class TetrisBlock
         moveright = false;
     }
 
+
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
+        //moves Tetromino right
         if (inputHelper.KeyPressed(Keys.Right))
         {
             this.position.X += block.Width;
         }
+        //moves Tetromino Left
         if (inputHelper.KeyPressed(Keys.Left))
         {
             this.position.X -= block.Width;
         }
-        if (movetime==1)
+        if(movetime==1)
         {
             this.position.Y += block.Height;
         }
-
+       
+        //should move the Tetromino down
+        if (inputHelper.KeyPressed(Keys.Down))
+        {
+            this.position.Y = position.Y+ 10* block.Height;
+        }
+        //rotates the Tetromino
         if (inputHelper.KeyPressed(Keys.Up))
         {
             this.Rotate();
         }
     }
 
- 
+   /*  public  Color[,]Shape()
+      {
+          get
+         { return shape;}
+      }*/
 
-   /* public bool CheckBorderLeft()
-    {
-        for (int x = 0; x < shape.GetLength(0); x++)
-            for (int y = 0; y < shape.GetLength(1); y++)
-                if (this.shape[x, y] == Color.White)
-                {
-
-                    if (position.X == block.Width * 12 + block.Width * x)
-                        moveleft = true;
-
-                }
-        return moveleft = false;
-    }
-
-    public bool CheckBorderRight()
-    {
-        for (int x = 0; x < shape.GetLength(0); x++)
-            for (int y = 0; y < shape.GetLength(1); y++)
-                if (this.shape[x, y] == Color.White)
-                {
-                    if (position.X == (12 - 1) * block.Width)
-                        moveright= true;
-                }
-        return moveright = false;
-    }*/
-   /* public TetrisGrid RandomBlok()
-    {
-
-    }*/
-
-    protected void Rotate()
+     protected void Rotate()
     {
         Color[,] shape2 = new Color[4, 4];
         for (int i = 3; i >= 0; --i)
@@ -93,7 +76,8 @@ class TetrisBlock
 
     public virtual void Update(GameTime gameTime)
     {  
-        movetime = gameTime.ElapsedGameTime.Milliseconds % 500;
+
+        movetime = gameTime.TotalGameTime.Milliseconds % 500;//moet nog gedeeld door het huidige level
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch s)
