@@ -59,6 +59,7 @@ class GameWorld
         introsong = Content.Load<Song>("IntroSong");
         playingsong = Content.Load<Song>("TetrisPlaying");
         MediaPlayer.Play(introsong);
+        MediaPlayer.IsRepeating = true;
         screenWidth = width;
         screenHeight = height;
         random = new Random();
@@ -96,6 +97,9 @@ class GameWorld
             
         if(gameState==GameState.Playing)
           tetrisBlock.HandleInput(gameTime, inputHelper);
+        if (gameState == GameState.Playing && inputHelper.KeyPressed(Keys.Space))
+           
+            gameState = GameState.StartScreen;
           
         if (gameState == GameState.GameOver && inputHelper.KeyPressed(Keys.Space))
         {
@@ -128,8 +132,9 @@ class GameWorld
         {
             grid.Draw(gameTime, spriteBatch);
             tetrisBlock.Draw(gameTime, spriteBatch);
-            spriteBatch.DrawString(font, "Score:"/*+score*/, new Vector2(screenWidth+block.Width, screenHeight) / 2, Color.Black);
-            spriteBatch.DrawString(font, "Level:"/*+level*/, new Vector2(screenWidth + block.Width, screenHeight+block.Width) / 2, Color.Black);
+            spriteBatch.DrawString(font, "Score:" + grid.Score, new Vector2(screenWidth + block.Width, screenHeight) / 2, Color.Black);
+            spriteBatch.DrawString(font, "Level:" + grid.Level, new Vector2(screenWidth + block.Width, screenHeight+block.Width) / 2, Color.Black);
+
         }
         else if (gameState == GameState.GameOver)
             spriteBatch.DrawString(font, "Game Over: /n Press <space> to try again", new Vector2(screenWidth, screenHeight) / 2,Color.Black);

@@ -13,7 +13,7 @@ class TetrisBlock
     //Point relPos;
     double movetime;
     protected Color[,] shape;
-    protected bool moveright, moveleft;
+    //protected bool moveright, moveleft;
 
     public TetrisBlock(Texture2D b)
     {
@@ -40,16 +40,15 @@ class TetrisBlock
         {
             this.position.Y += block.Height;
         }*/
-       
+
         //should move the Tetromino down
-        if (inputHelper.IsKeyDown(Keys.Down))
+        if (inputHelper.IsKeyDown(Keys.Down)&&GroundCollision()==false)
         {
-            this.position.Y +=  block.Height;
-            this.position.Y += 20;
+            this.position.Y += block.Width;
 
         }
         //rotates the Tetromino
-        if (inputHelper.KeyPressed(Keys.Up))
+        if (inputHelper.KeyPressed(Keys.Up)&&GroundCollision()==false)
         {
             this.Rotate();
         }
@@ -96,13 +95,29 @@ class TetrisBlock
                 }
     }
 
+   public bool GroundCollision()
+    {
+       for (int x = 0; x < Shape.GetLength(0); x++)
+      
+           for (int y = 0; y < Shape.GetLength(1); y++)
+          
+                if (this.Shape[x,y] != Color.White)
+                     {
+                        if ((position.Y + ((y+2)  * block.Height) > 20*block.Height))
+                         {
+                             return true;
+                            }
+                }
+            return false;
+       }
+ 
     public bool Collision()
     {
         //checks if a Tetromino will intersect
-        for (int x = 0; x < shape.GetLength(0); x++)
-            for (int y = 0; y < shape.GetLength(1); y++)
+        for (int x = 0; x < Shape.GetLength(0); x++)
+            for (int y = 0; y < Shape.GetLength(1); y++)
             {
-                if (shape[x, y] != Color.White)
+                if (this.Shape[x, y] != Color.White)
                 {
                     if (TetrisGame.GameWorld.Grid.colGrid[((int)position.X + x * block.Width) / block.Width, ((int)position.Y + ((y + 1) * + block.Height)) / block.Height] != Color.White)
                     {

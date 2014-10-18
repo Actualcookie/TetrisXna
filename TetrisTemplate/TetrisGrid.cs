@@ -11,7 +11,7 @@ using System.Collections;
  */
 class TetrisGrid
 {
-   public Color[,] colGrid = new Color[12, 22];
+   public Color[,] colGrid = new Color[14, 22];
    public int score, level;
     /*
      * sprite for representing a single grid block
@@ -34,11 +34,12 @@ class TetrisGrid
         level = score / 30;
         gridblock = b;
         position = Vector2.Zero;
-        for (int x = 0; x < colGrid.GetLength(0); x++)
+        for (int x = 1; x < 13; x++)
             for (int y = 0; y < 20; y++)
                 colGrid[x, y] = Color.White;
         currentblock = RandomBlock();
         nextblock = RandomBlock();
+        colGrid[5, 8] = Color.Red;
 
     }
 
@@ -46,15 +47,15 @@ class TetrisGrid
     public void ReturntoGrid()
     {
         //writes the shape grid to the main grid
-        if (currentblock.Collision())
+        if (currentblock.Collision()|| currentblock.GroundCollision())
         {
             for (int x = 0; x < 4; x++)
                 for (int y = 0; y < 4; y++)
-                    if (currentblock.Shape[x, y] != Color.White)//moet nog een timer hebben net als het naar beneden bewegen
+                    //if (currentblock.Shape[x, y] != Color.White)//moet nog een timer hebben net als het naar beneden bewegen
                     {
                         colGrid[((int)position.X + x * gridblock.Width) / gridblock.Width, ((int)position.Y + ((y + 1) * +gridblock.Height)) / gridblock.Height] = currentblock.Shape[x,y];
                     }
-        }
+          }
         }
 
 
@@ -138,7 +139,7 @@ class TetrisGrid
     public void ClearRow(int row)
     {
         for (int i = row; i >= 1; i--)
-            for (int j = 0; j < 12; j++)
+            for (int j = 1; j < 13; j++)
                 colGrid[j, i] = colGrid[j, i - 1];
         //all rows are shifted down once starting from the row above the one you want to clear.
         for (int x = 0; x < 12; x++)
