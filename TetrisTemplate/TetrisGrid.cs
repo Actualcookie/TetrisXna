@@ -1,9 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections;
 
 /*
  * a class for representing the Tetris playing grid
@@ -25,6 +26,7 @@ class TetrisGrid
     /*
      * width in terms of grid elements
      */
+    TetrisBlock currentblock, nextblock;
 
     public TetrisGrid(Texture2D b)
     {
@@ -33,39 +35,25 @@ class TetrisGrid
         for (int x = 0; x < colGrid.GetLength(0); x++)
             for (int y = 0; y < 20; y++)
                 colGrid[x, y] = Color.White;
+        nextblock = RandomBlock();
 
     }
     //Width on the grid
-   /*public bool Collision()
-    {
-       //checks if a Tetromino will intersect
-        for (int x = 0; x < shape.GetLength(0); x++)
-            for (int y = 0; y <shape.GetLength(1); y++)
-            {
-                if (shape[x, y] != Color.White)
-                {
-                    if (colGrid[((int)position.X + x * gridblock.Width) / gridblock.Width, ((int)position.Y + ((y + 1) * + gridblock.Height)) / gridblock.Height] != Color.White)
-                    {
-                        return true;
-                    }
-                }
-            }
-        return false;
-    }
+
     public void ReturntoGrid()
     {
         //writes the shape grid to the main grid
-        if (Collision())
+        if (currentblock.Collision(this))
         {
-            for(int x= 0; x < 4; x++)
-                for(int y= 0; y < 4; y++)
-                 if(shape[x,y]!= Color.White )//moet nog een timer hebben net als het naar beneden bewegen
-                {
-                    colGrid[((int)position.X + x * gridblock.Width) / gridblock.Width, ((int)position.Y + ((y + 1) * +gridblock.Height)) / gridblock.Height] = shape;
-                }
-
+            for (int x = 0; x < 4; x++)
+                for (int y = 0; y < 4; y++)
+                    if (currentblock.Shape[x, y] != Color.White)//moet nog een timer hebben net als het naar beneden bewegen
+                    {
+                        colGrid[((int)position.X + x * gridblock.Width) / gridblock.Width, ((int)position.Y + ((y + 1) * +gridblock.Height)) / gridblock.Height] = currentblock.Shape[x,y];
+                    }
         }
-    */
+    }
+    
  
     
     public int Width
@@ -85,10 +73,10 @@ class TetrisGrid
     public bool Update(GameTime gameTime)
     {
         //Shows block on screen
-      /*  if (Collision && movetime == 0)
+      /* if (Collision && movetime == 0)
         {
            currentblock = nextblock ;
-           nextblock = blockcalled;
+           nextblock = RandomBlock();
         }  */
 
         
@@ -113,6 +101,10 @@ class TetrisGrid
         for (int x = 0; x < colGrid.GetLength(0); x++)
             for (int y = 0; y < colGrid.GetLength(1); y++)
                 s.Draw(gridblock, new Vector2(position.X + x * gridblock.Width, position.Y + y * gridblock.Height), colGrid[x,y]);
+
+        for (int x = 0; x < nextblock.Shape.GetLength(0); x++)
+            for (int y = 0; y < nextblock.Shape.GetLength(1); y++)
+                s.Draw(gridblock, new Vector2(position.X + (x + 14) * gridblock.Width, position.Y + (y + 1) * gridblock.Height), nextblock.Shape[x, y]);
     }
 
     public void ClearRow(int row)
@@ -124,6 +116,37 @@ class TetrisGrid
         for (int x = 0; x < 12; x++)
             colGrid[x, 0] = Color.White;
         //the top row is always empty after being shifted so this clears the top row.
+    }
+
+    public TetrisBlock RandomBlock()
+    {
+        TetrisBlock b;
+        switch (TetrisGame.Random.Next(7)){
+            case 0: 
+                b = new IBlock(gridblock);
+                return b;
+            case 1: 
+                b = new JBlock(gridblock);
+                return b;
+            case 2: 
+                b = new LBlock(gridblock);
+                return b;
+            case 3: 
+                b = new OBlock(gridblock);
+                return b;
+            case 4: 
+                b = new SBlock(gridblock);
+                return b;
+            case 5: 
+                b = new TBlock(gridblock);
+                return b;
+            case 6: 
+                b = new ZBlock(gridblock);
+                return b;
+            default:
+                return null;
+        }
+        
     }
 }
 

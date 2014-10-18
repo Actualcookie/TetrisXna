@@ -9,10 +9,10 @@ using Microsoft.Xna.Framework.Input;
 class TetrisBlock
 {
     protected Vector2 position;
-    public Texture2D block;
+    Texture2D block;
     //Point relPos;
     float movetime;
-    public Color[,] shape;
+    protected Color[,] shape;
     protected bool moveright, moveleft;
 
     public TetrisBlock(Texture2D b)
@@ -42,9 +42,9 @@ class TetrisBlock
         }
        
         //should move the Tetromino down
-        if (inputHelper.KeyPressed(Keys.Down))
+        if (inputHelper.IsKeyDown(Keys.Down))
         {
-            this.position.Y = position.Y+ 10* block.Height;
+            this.position.Y += 20;
         }
         //rotates the Tetromino
         if (inputHelper.KeyPressed(Keys.Up))
@@ -53,11 +53,10 @@ class TetrisBlock
         }
     }
 
-   /*  public  Color[,]Shape()
+   public  Color[,] Shape
       {
-          get
-         { return shape;}
-      }*/
+          get { return shape;}
+      }
 
      protected void Rotate()
     {
@@ -90,5 +89,20 @@ class TetrisBlock
                 }
     }
 
-
+    public bool Collision(TetrisGrid grid)
+    {
+        //checks if a Tetromino will intersect
+        for (int x = 0; x < shape.GetLength(0); x++)
+            for (int y = 0; y < shape.GetLength(1); y++)
+            {
+                if (shape[x, y] != Color.White)
+                {
+                    if (grid.colGrid[((int)position.X + x * block.Width) / block.Width, ((int)position.Y + ((y + 1) * + block.Height)) / block.Height] != Color.White)
+                    {
+                        return true;
+                    }
+                }
+            }
+        return false;
+    }
 }
