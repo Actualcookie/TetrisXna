@@ -11,17 +11,6 @@ using System;
 class TetrisGrid
 {
    public Color[,] colGrid = new Color[12, 20];
-    
-    public TetrisGrid(Texture2D b)
-    {
-        gridblock = b;
-        position = Vector2.Zero;
-        this.Clear();
-        for (int x = 0; x < 12; x++)
-            for (int y = 0; y < 20; y++)
-                colGrid[x, y] = Color.White;  
-                              
-    }
 
     /*
      * sprite for representing a single grid block
@@ -36,6 +25,17 @@ class TetrisGrid
     /*
      * width in terms of grid elements
      */
+
+    public TetrisGrid(Texture2D b)
+    {
+        gridblock = b;
+        position = Vector2.Zero;
+        for (int x = 0; x < colGrid.GetLength(0); x++)
+            for (int y = 0; y < colGrid.GetLength(1); y++)
+                colGrid[x, y] = Color.White;
+
+    }
+    //Width on the grid
     public int Width
     {
         get { return 12; }
@@ -48,20 +48,26 @@ class TetrisGrid
     {
         get { return 20; }
     }
-
-    /*
-     * clears the grid
-     */
-    public void Clear()
+    public bool Collision()
     {
+        for (int x = 0; x < shape.GetLength(0); x++)
+            for (int y = 0; y < shape.GetLength(1); y++)
+            {
+                if (shape[x, y] != Color.White)
+                {
+                    if (colGrid[(position.X + x * block.Width) / block.Width, (position.Y + ((y + 1) * +block.Height)) / block.Height] != Color.White)
+                    {
+                        return true;
+                    }
+                }
+            }
+        return false;
     }
 
-    /*
-     * draws the grid on the screen
-     */
 
     public bool Update(GameTime gameTime)
     {
+        //entire method dedicated to clearing rows in the tetrisgrid
         for (int y = 0; y < 20; y++)
         {
             bool del = true;
@@ -73,14 +79,16 @@ class TetrisGrid
             if (del)
                 ClearRow(y);
         }
-        return false;
+     
+       return false;
     }
   
     public void Draw(GameTime gameTime, SpriteBatch s)
     {
-        for (int t = 0; t < 12; t++)
-            for (int n = 0; n < 20; n++)
-                s.Draw(gridblock, new Vector2(position.X + t * gridblock.Width, position.Y + n * gridblock.Height), colGrid[t,n]);
+        //Draws the Grid on the screen in the correct colors
+        for (int x = 0; x < colGrid.GetLength(0); x++)
+            for (int y = 0; y < colGrid.GetLength(1); y++)
+                s.Draw(gridblock, new Vector2(position.X + x * gridblock.Width, position.Y + y * gridblock.Height), colGrid[x,y]);
     }
 
     public void ClearRow(int row)

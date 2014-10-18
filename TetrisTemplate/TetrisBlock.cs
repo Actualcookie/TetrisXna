@@ -9,17 +9,15 @@ using Microsoft.Xna.Framework.Input;
 class TetrisBlock
 {
     protected Vector2 position;
-    Texture2D block;
+    public Texture2D block;
     //Point relPos;
     float movetime;
-    protected Color[,] shape;
-    public Vector2 SetPosition;
+    public Color[,] shape;
     protected bool moveright, moveleft;
 
     public TetrisBlock(Texture2D b)
     {
         block = b;
-        SetPosition = new Vector2(4, -1);
         position = Vector2.Zero;
         moveleft = false;
         moveright = false;
@@ -35,7 +33,7 @@ class TetrisBlock
         {
             this.position.X -= block.Width;
         }
-        if (movetime==10|| movetime==4)
+        if (movetime==1)
         {
             this.position.Y += block.Height;
         }
@@ -46,6 +44,7 @@ class TetrisBlock
         }
     }
 
+ 
 
    /* public bool CheckBorderLeft()
     {
@@ -91,17 +90,10 @@ class TetrisBlock
         //Copy the rotated version back to the original
     }
     
-   /* protected bool Collision()
-    {
-        if( )
-        {
-
-        }
-    }*/
 
     public virtual void Update(GameTime gameTime)
     {  
-        movetime = gameTime.ElapsedGameTime.Milliseconds;
+        movetime = gameTime.ElapsedGameTime.Milliseconds % 500;
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch s)
