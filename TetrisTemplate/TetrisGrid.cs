@@ -99,7 +99,7 @@ class TetrisGrid
     public void Update(GameTime gameTime)
     {
         //Shows block on screen
-       if (currentblock.Collision()||currentblock.GroundCollision())
+       if (currentblock.Speed == 0)
         {
            currentblock = nextblock ;
            nextblock = RandomBlock();
@@ -143,7 +143,7 @@ class TetrisGrid
     public void ClearRow(int row)
     {
         for (int i = row; i >= 1; i--)
-            for (int j = 1; j < 13; j++)
+            for (int j = 0; j < 12; j++)
                 colGrid[j, i] = colGrid[j, i - 1];
         //all rows are shifted down once starting from the row above the one you want to clear.
         for (int x = 0; x < 12; x++)

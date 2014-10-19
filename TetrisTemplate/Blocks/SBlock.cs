@@ -19,7 +19,14 @@ class SBlock : TetrisBlock
             {Color.Green,  Color.Green, Color.White,Color.White},
             {Color.White, Color.White, Color.White, Color.White},
           };
-
+        shape2 = new Color[4, 4]
+        
+           {
+            {Color.White, Color.Green, Color.White, Color.White},
+            {Color.White, Color.Green, Color.Green, Color.White},
+            {Color.White,  Color.White, Color.Green,Color.White},
+            {Color.White, Color.White, Color.White, Color.White},
+          };
     }
 }
 

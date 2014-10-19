@@ -18,6 +18,14 @@ using Microsoft.Xna.Framework.Graphics;
             {Color.White,   Color.Yellow,   Color.Yellow,   Color.White},
             {Color.White, Color.White, Color.White, Color.White},
           };
+               shape2 = new Color[4, 4]
+        
+           {
+            {Color.White, Color.White, Color.Yellow, Color.White},
+            {Color.White, Color.Yellow, Color.Yellow, Color.White},
+            {Color.White,   Color.Yellow,   Color.White,   Color.White},
+            {Color.White, Color.White, Color.White, Color.White},
+          };
 
         }
     }

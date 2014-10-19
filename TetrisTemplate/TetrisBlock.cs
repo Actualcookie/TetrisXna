@@ -11,7 +11,7 @@ class TetrisBlock
     protected Vector2 position;
     Texture2D block;
     //Point relPos;
-    protected Color[,] shape;
+    protected Color[,] shape, shape2;
     float speed;
 
 
@@ -26,26 +26,29 @@ class TetrisBlock
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
         //moves Tetromino right
-        if (inputHelper.KeyPressed(Keys.Right))
+        if (inputHelper.KeyPressed(Keys.Right, false))
         {
-            this.position.X += (block.Width/2);
+            this.position.X += block.Width / 2;
+            if(Collision())
+                this.position.X -= block.Width / 2;
         }
         //moves Tetromino Left
-        if (inputHelper.KeyPressed(Keys.Left))
+        if (inputHelper.KeyPressed(Keys.Left, false))
         {
-            this.position.X -= (block.Width/2);
+            this.position.X -= block.Width / 2;
+            if(Collision())
+                this.position.X += block.Width / 2;
         }  
         //should move the Tetromino down
-        if (inputHelper.IsKeyDown(Keys.Down)&&GroundCollision()==false)
+        if (inputHelper.IsKeyDown(Keys.Down))
         {
-
-            this.position.Y += block.Width;
-            this.position.Y += 0.5f * speed;
+            if (!GroundCollision() || Collision())
+                this.position.Y += 0.5f * speed;
 
 
         }
         //rotates the Tetromino
-        if (inputHelper.KeyPressed(Keys.Up)&&GroundCollision()==false)
+        if (inputHelper.KeyPressed(Keys.Up))
         {
             this.Rotate();
         }
@@ -57,30 +60,22 @@ class TetrisBlock
       }    
      protected void Rotate()
     {
-        Color[,] shape2 = new Color[4, 4];
-        for (int i = 3; i >= 0; --i)
-            for (int j = 0; j < 4; j++)
-                shape2[j, 3 - i] = shape[i, j];
-        //Store a clockwisely rotated version of shape in shape2
-
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-                shape[i, j] = shape2[i, j];
-        //Copy the rotated version back to the original
+       //need working code
     }
     
 
 
     public virtual void Update(GameTime gameTime)
     {
-        if (!Collision()||!GroundCollision())
+        if (Collision() || GroundCollision())
+        {
+            speed = 0;
+        }
+        else 
         {
             speed = 10 + 10 * TetrisGame.GameWorld.Grid.Level;
             position.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
-        GroundCollision();
-        Collision();
-
 
     }
 
@@ -121,11 +116,16 @@ class TetrisBlock
             for (int y = 0; y < Shape.GetLength(1); y++)
             {
                  if (this.Shape[x, y] != Color.White)
-                     if (TetrisGame.GameWorld.Grid.colGrid[((int)position.X + x * block.Width) / block.Width, ((int)position.Y + ((y + 1) * +block.Height)) / block.Height] != Color.White)
+                     if (TetrisGame.GameWorld.Grid.colGrid[((int)position.X + x * block.Width) / block.Width, ((int)position.Y + ((y + 1) * + block.Height)) / block.Height] != Color.White)
                   {
                         return true;
                   }
                }
         return false;
+    }
+
+    public float Speed
+    {
+        get { return speed; }
     }
 }
