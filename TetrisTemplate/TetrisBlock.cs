@@ -11,7 +11,7 @@ class TetrisBlock
     protected Vector2 position;
     Texture2D block;
     //Point relPos;
-    protected Color[,] shape, shape2;
+    protected Color[,] shape;
     float speed;
 
 
@@ -103,7 +103,7 @@ class TetrisBlock
         //checks if a colored piece of Tetromino will intersect with the block currently below it
         for (int x = 0; x < Shape.GetLength(0); x++)
             for (int y = 0; y < Shape.GetLength(1); y++)
-            {
+            {//if the block below the shape is not White it becomes true
                  if (this.Shape[x, y] != Color.White)
                      if (TetrisGame.GameWorld.Grid.colGrid[((int)position.X + x * block.Width) / block.Width, ((int)position.Y + ((y + 1) * + block.Height)) / block.Height] != Color.White)
                   {
