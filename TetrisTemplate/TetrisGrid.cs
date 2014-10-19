@@ -37,9 +37,10 @@ class TetrisGrid
         for (int x = 1; x < 13; x++)
             for (int y = 0; y < 20; y++)
                 colGrid[x, y] = Color.White;
+       //initialzation for the blocks at the start of the game
         currentblock = RandomBlock();
         nextblock = RandomBlock();
-        colGrid[5, 8] = Color.Red;
+        
 
     }
 
@@ -47,11 +48,11 @@ class TetrisGrid
     public void ReturntoGrid()
     {
         //writes the shape grid to the main grid
-        if (currentblock.Collision()|| currentblock.GroundCollision())
+        if (currentblock.Collision())
         {
             for (int x = 0; x < 4; x++)
                 for (int y = 0; y < 4; y++)
-                   if (currentblock.Shape[x, y] != Color.White)//moet nog een timer hebben net als het naar beneden bewegen
+                   if (currentblock.Shape[x, y] != Color.White)
                     {
                         colGrid[((int)currentblock.Position.X + x * gridblock.Width) / gridblock.Width, ((int)currentblock.Position.Y + (y * +gridblock.Height)) / gridblock.Height] = currentblock.Shape[x,y];
                     }
@@ -62,10 +63,10 @@ class TetrisGrid
     // Method checks if top row of the Grid contains a Tetromino
     public bool TopRow()
     {
-        for (int g = 0; g < colGrid.GetLength(0); g++)
+        for (int g = 1; g < 13; g++)
             if (colGrid[g, 0] != Color.White)
             {
-
+                return true;
             }
         return false;
     }  
@@ -107,6 +108,7 @@ class TetrisGrid
 
         currentblock.Update(gameTime);
         ReturntoGrid();
+       //This instruction checks all row to see if they contain a block with Color White if they do the row is cleared and the other rows shifted down one
         for (int y = 0; y < 20; y++)
         {
             bool del = true;
@@ -122,7 +124,7 @@ class TetrisGrid
                 level = score / 30;
             }
         }
-     
+        TopRow();
     }
   
     public void Draw(GameTime gameTime, SpriteBatch s)
@@ -132,7 +134,7 @@ class TetrisGrid
         for (int x = 0; x < colGrid.GetLength(0); x++)
             for (int y = 0; y < colGrid.GetLength(1); y++)
                 s.Draw(gridblock, new Vector2(position.X + x * gridblock.Width, position.Y + y * gridblock.Height), colGrid[x,y]);
-
+        //draws the block that comes after the currentblock on the side of the screen
         for (int x = 0; x < nextblock.Shape.GetLength(0); x++)
             for (int y = 0; y < nextblock.Shape.GetLength(1); y++)
                 s.Draw(gridblock, new Vector2(position.X + (x + 14) * gridblock.Width, position.Y + (y + 1) * gridblock.Height), nextblock.Shape[x, y]);
@@ -143,16 +145,17 @@ class TetrisGrid
     public void ClearRow(int row)
     {
         for (int i = row; i >= 1; i--)
-            for (int j = 0; j < 12; j++)
+            for (int j = 1; j < 13; j++)
                 colGrid[j, i] = colGrid[j, i - 1];
         //all rows are shifted down once starting from the row above the one you want to clear.
-        for (int x = 0; x < 12; x++)
+        for (int x = 1; x < 13; x++)
             colGrid[x, 0] = Color.White;
         //the top row is always empty after being shifted so this clears the top row.
     }
 
     public TetrisBlock RandomBlock()
     {
+        //decides wat the next block is going to be an returns that as a b value
         int num = GameWorld.Random.Next(7);
         TetrisBlock b;
         switch (num){

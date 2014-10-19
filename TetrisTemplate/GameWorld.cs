@@ -56,8 +56,11 @@ class GameWorld
     public GameWorld(int width, int height, ContentManager Content)
     {
         introsong = Content.Load<Song>("IntroSong");
+        //song currently not in use.
         playingsong = Content.Load<Song>("TetrisPlaying");
+        // plays the song
         MediaPlayer.Play(introsong);
+        // let's the song Repeat.
         MediaPlayer.IsRepeating = true;
         screenWidth = width;
         screenHeight = height;
@@ -71,10 +74,14 @@ class GameWorld
         butPos = new Vector2(screenWidth-button.Width,screenHeight-button.Height );
     }
 
-  
+  //Resets the field to default
     public void Reset()
     {
-       
+        if (gameState == GameState.GameOver)
+           for (int i = 1; i < 13; i++)
+               for (int j = 0; j < 20; j++)
+                   if (grid.colGrid[i, j] != Color.White)
+                       grid.colGrid[i, j] = Color.White;
     }
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
@@ -96,12 +103,6 @@ class GameWorld
         if(gameState==GameState.Playing)
 
           grid.currentblock.HandleInput(gameTime, inputHelper);
-        if (gameState == GameState.Playing && inputHelper.KeyPressed(Keys.Space))
-           
-            gameState = GameState.StartScreen;
-
-          grid.currentblock.HandleInput(gameTime, inputHelper);
-
           
         if (gameState == GameState.GameOver && inputHelper.KeyPressed(Keys.Space))
         {
@@ -119,7 +120,8 @@ class GameWorld
     public void Update(GameTime gameTime)
     {
         grid.Update(gameTime);
-        if (grid.TopRow())
+         Reset();
+       if (grid.TopRow())
             gameState = GameState.GameOver;
     }
 
@@ -137,11 +139,11 @@ class GameWorld
             grid.Draw(gameTime, spriteBatch);
 
             grid.currentblock.Draw(gameTime, spriteBatch);
-            spriteBatch.DrawString(font, "Score:" + grid.Score, new Vector2(screenWidth + block.Width, screenHeight) / 2, Color.Black);
-            spriteBatch.DrawString(font, "Level:" + grid.Level, new Vector2(screenWidth + block.Width, screenHeight+block.Width) / 2, Color.Black);
+            spriteBatch.DrawString(font, "Score: " + grid.Score, new Vector2(screenWidth + block.Width, screenHeight) / 2, Color.Black);
+            spriteBatch.DrawString(font, "Level: " + grid.Level, new Vector2(screenWidth + block.Width, screenHeight+block.Width) / 2, Color.Black);
         }
         else if (gameState == GameState.GameOver)
-            spriteBatch.DrawString(font, "Game Over: /n Press <space> to try again", new Vector2(screenWidth, screenHeight) / 2,Color.Black);
+            spriteBatch.DrawString(font, "Game Over: Press <space> to try again", new Vector2(0, screenHeight) / 2,Color.Black);
         spriteBatch.End();    
     }
 
