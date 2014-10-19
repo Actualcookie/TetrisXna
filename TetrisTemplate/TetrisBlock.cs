@@ -28,14 +28,14 @@ class TetrisBlock
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
         //moves Tetromino right
-        if (inputHelper.KeyPressed(Keys.Right, false))
+        if (inputHelper.KeyPressed(Keys.Right))
         {
             this.position.X += block.Width;
             if(Collision())
                 this.position.X -= block.Width;
         }
         //moves Tetromino Left
-        if (inputHelper.KeyPressed(Keys.Left, false))
+        if (inputHelper.KeyPressed(Keys.Left))
         {
             this.position.X -= block.Width;
             if(Collision())
@@ -45,10 +45,10 @@ class TetrisBlock
         if (inputHelper.IsKeyDown(Keys.Down))
         {
             if (!Collision())
-                this.position.Y += 0.5f * speed;
+                this.position.Y += 150 * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
         //rotates the Tetromino
-        if (inputHelper.KeyPressed(Keys.Up))
+        if (inputHelper.KeyPressed(Keys.Up, false))
         {
               this.Rotate();
         }
@@ -66,6 +66,9 @@ class TetrisBlock
             for (int j = 0; j < 4; ++j)
                 rotate[4-j-1, i] = Shape[i, j];
          this.shape = rotate;
+
+         if (Collision())
+             this.Rotate();
                
     }
     public virtual void Update(GameTime gameTime)
@@ -77,7 +80,7 @@ class TetrisBlock
         }
         else 
         {
-            speed = 10 + 5 * TetrisGame.GameWorld.Grid.Level;
+            speed = 10 * (TetrisGame.GameWorld.Grid.Level + 1);
             position.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 

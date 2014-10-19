@@ -21,8 +21,6 @@ class OBlock : TetrisBlock
             {Color.White, Color.White, Color.White, Color.White},
           };
 
-        shape2 = shape;
-
     }
 }
 

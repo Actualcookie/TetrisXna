@@ -21,14 +21,6 @@ using Microsoft.Xna.Framework.Graphics;
             {Color.White, Color.White, Color.White, Color.White},
           };
 
-               shape2 = new Color[4, 4]
-        
-           {
-            {Color.White, Color.Red, Color.White, Color.White},
-            {Color.White, Color.Red, Color.White, Color.White},
-            {Color.White, Color.Red, Color.White, Color.White},
-            {Color.White, Color.Red, Color.White, Color.White},
-          };
         }
     }
     

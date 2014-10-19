@@ -87,18 +87,21 @@ class GameWorld
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
         //chances the gamestates to other gamestate
-        if (gameState==GameState.StartScreen)
+        if (gameState == GameState.StartScreen)
         {
-           
-             int x=(int) 280;
-             int y=(int) 80;
-             Rectangle button = new Rectangle((int)butPos.X, (int)butPos.Y, x , y );
-             pressed = inputHelper.MouseLeftButtonPressed() &&
-               button.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y);
-       }
 
-        if (gameState == GameState.StartScreen && inputHelper.KeyPressed(Keys.Space) ||pressed)
-            gameState = GameState.Playing;
+            int x = (int)280;
+            int y = (int)80;
+            Rectangle button = new Rectangle((int)butPos.X, (int)butPos.Y, x, y);
+            pressed = inputHelper.MouseLeftButtonPressed() && button.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y);
+
+            if (inputHelper.KeyPressed(Keys.Space) || pressed)
+            {
+                gameState = GameState.Playing;
+                grid.Reset();
+            }
+        }
+
             
         if(gameState==GameState.Playing)
 
@@ -106,7 +109,6 @@ class GameWorld
           
         if (gameState == GameState.GameOver && inputHelper.KeyPressed(Keys.Space))
         {
-            
             gameState = GameState.StartScreen;
         }
     }
@@ -139,11 +141,11 @@ class GameWorld
             grid.Draw(gameTime, spriteBatch);
 
             grid.currentblock.Draw(gameTime, spriteBatch);
-            spriteBatch.DrawString(font, "Score: " + grid.Score, new Vector2(screenWidth + block.Width, screenHeight) / 2, Color.Black);
-            spriteBatch.DrawString(font, "Level: " + grid.Level, new Vector2(screenWidth + block.Width, screenHeight+block.Width) / 2, Color.Black);
+            spriteBatch.DrawString(font, "Score:  " + grid.Score, new Vector2(screenWidth / 2 + block.Width, screenHeight / 2), Color.Black);
+            spriteBatch.DrawString(font, "Level:  " + grid.Level, new Vector2(screenWidth / 2 + block.Width, screenHeight / 2 + block.Width), Color.Black);
         }
         else if (gameState == GameState.GameOver)
-            spriteBatch.DrawString(font, "Game Over: Press <space> to try again", new Vector2(0, screenHeight) / 2,Color.Black);
+            spriteBatch.DrawString(font, "Game Over: Press <space> to try again", new Vector2(screenWidth / 2 - 20, screenHeight) / 2,Color.Black);
         spriteBatch.End();    
     }
 

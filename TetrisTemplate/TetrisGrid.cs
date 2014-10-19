@@ -60,13 +60,13 @@ class TetrisGrid
         }
 
 
-    // Method checks if top row of the Grid contains a Tetromino
+    // Method checks if top row of the Grid contains a Tetromino.
     public bool TopRow()
     {
-        for (int g = 1; g < 13; g++)
+        for (int g = 0; g < 12; g++)
             if (colGrid[g, 0] != Color.White)
             {
-                return true;
+                   return true;
             }
         return false;
     }  
@@ -153,6 +153,17 @@ class TetrisGrid
         //the top row is always empty after being shifted so this clears the top row.
     }
 
+    public void Reset()
+    {
+        position = Vector2.Zero;
+        for (int x = 1; x < 13; x++)
+            for (int y = 0; y < 20; y++)
+                colGrid[x, y] = Color.White;
+        currentblock = RandomBlock();
+        nextblock = RandomBlock();
+        score = 0;
+        level = 0;
+    }
     public TetrisBlock RandomBlock()
     {
         //decides wat the next block is going to be an returns that as a b value

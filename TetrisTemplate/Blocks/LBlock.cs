@@ -17,11 +17,5 @@ class LBlock : TetrisBlock
             {Color.Blue,  Color.Blue,   Color.Blue, Color.White},
             {Color.White, Color.White, Color.White, Color.White},
           };
-           shape2 = new Color[4, 4]{
-            {Color.White, Color.Blue, Color.White, Color.White},
-            {Color.White, Color.Blue, Color.White,  Color.White},
-            {Color.White,  Color.Blue,   Color.Blue, Color.White},
-            {Color.White, Color.White, Color.White, Color.White},
-          };
       }
 }
